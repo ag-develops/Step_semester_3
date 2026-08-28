@@ -1,37 +1,32 @@
-class Employee {
+class BookInventory {
+    String title;
+    String author;
+    int copiesAvailable;
 
-    String empId;
-    String empName;
-    double salary;
-    boolean isIntern;
-
-    // Constructor for permanent employee
-    public Employee(String empId, String empName, double salary) {
-        this.empId = empId;
-        this.empName = empName;
-        this.salary = salary;
-        this.isIntern = false;
+    BookInventory(String title, String author, int copiesAvailable) {
+        this.title = title;
+        this.author = author;
+        this.copiesAvailable = copiesAvailable;
     }
 
-    // Constructor for intern
-    public Employee(String empId, String empName) {
-        this(empId, empName, 0);
-        this.isIntern = true;
-    }
-
-    void printProfile() {
-        System.out.println(empId + " | " + empName + " | Rs "
-                + salary + " | Intern: " + isIntern);
+    void printEntry() {
+        System.out.println(title + " by " + author + " - "
+                + copiesAvailable + " copies available");
     }
 }
 
 public class Main {
     public static void main(String[] args) {
 
-        Employee e1 = new Employee("E-101", "Divya", 65000);
-        Employee e2 = new Employee("E-102", "Arjun");
+        BookInventory[] books = {
+            new BookInventory("Clean Code", "Robert C. Martin", 3),
+            new BookInventory("Effective Java", "Joshua Bloch", 5),
+            new BookInventory("Refactoring", "Martin Fowler", 0),
+            new BookInventory("Design Patterns", "GoF", 2)
+        };
 
-        e1.printProfile();
-        e2.printProfile();
+        for (BookInventory book : books) {
+            book.printEntry();
+        }
     }
 }
