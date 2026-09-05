@@ -1,43 +1,43 @@
+package string.class_problems;
+
 import java.util.*;
 
-class RPS {
-    static String playRound(String p, String c) {
-        if (p.equals(c)) return "Draw";
-        if ((p.equals("Rock") && c.equals("Scissors")) ||
-            (p.equals("Paper") && c.equals("Rock")) ||
-            (p.equals("Scissors") && c.equals("Paper")))
+public class RPS {
+    static String playRound(String player, String computer) {
+        if (player.equals(computer)) return "Draw";
+        if ((player.equals("Rock") && computer.equals("Scissors")) ||
+            (player.equals("Paper") && computer.equals("Rock")) ||
+            (player.equals("Scissors") && computer.equals("Paper"))) {
             return "Player Wins";
+        }
         return "Computer Wins";
     }
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Random r = new Random();
-
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
         String[] moves = {"Rock", "Paper", "Scissors"};
-        String[] player = new String[5];
-        String[] computer = new String[5];
-        String[] result = new String[5];
 
-        int w = 0, l = 0, d = 0;
+        int wins = 0, losses = 0, draws = 0;
 
-        for (int i = 0; i < 5; i++) {
+        for (int round = 1; round <= 5; round++) {
             System.out.print("Enter Rock/Paper/Scissors: ");
-            player[i] = sc.next();
-            computer[i] = moves[r.nextInt(3)];
-            result[i] = playRound(player[i], computer[i]);
+            String player = scanner.next();
+            String computer = moves[random.nextInt(3)];
+            String result = playRound(player, computer);
 
-            if (result[i].equals("Player Wins")) w++;
-            else if (result[i].equals("Computer Wins")) l++;
-            else d++;
+            System.out.println("Round " + round + ": " + result);
+
+            if (result.equals("Player Wins")) wins++;
+            else if (result.equals("Computer Wins")) losses++;
+            else draws++;
         }
 
-        System.out.println("\nRound\tPlayer\tComputer\tResult");
-        for (int i = 0; i < 5; i++)
-            System.out.println((i+1) + "\t" + player[i] + "\t" + computer[i] + "\t\t" + result[i]);
+        System.out.println("Wins: " + wins);
+        System.out.println("Losses: " + losses);
+        System.out.println("Draws: " + draws);
+        System.out.println("Win %: " + (wins * 100.0 / 5) + "%");
 
-        System.out.println("Wins: " + w + " | Losses: " + l +
-                           " | Draws: " + d +
-                           " | Win % = " + (w * 100.0 / 5) + "%");
+        scanner.close();
     }
 }
